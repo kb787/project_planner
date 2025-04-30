@@ -36,6 +36,7 @@ class UserBase:
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
         return json.dumps([{
+            "id": user["id"],
             "name": user["name"],
             "display_name": user["display_name"],
             "creation_time": user["creation_time"]
@@ -66,8 +67,9 @@ class UserBase:
             data = json.loads(request)
             print(data,"data")
             user_id = data.get("id")
-            user_data = data.get("user")
-            
+            user_data = data
+            print(user_id,"user_id")
+            print(user_data,"user_data")
             if not user_id or not user_data:
                 raise ValueError("User ID and user data are required")
             
@@ -77,10 +79,10 @@ class UserBase:
                 raise ValueError(f"User with ID {user_id} does not exist")
             
             # User name cannot be updated
-            if "name" in user_data and user_data["name"] != user.name:
+            if "name" in user_data and user_data.get("name") != user.name:
                 raise ValueError("User name cannot be updated")
             
-            elif "display_name" in user_data and user_data["display_name"] != user.display_name:
+            elif "display_name" in user_data and user_data.get("display_name") != user.display_name:
                 raise ValueError("User display name cannot be updated") 
             
             serializer = UserUpdateSerializer(user, data=user_data, partial=True)
