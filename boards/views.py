@@ -9,8 +9,7 @@ from datetime import datetime
 import os
 from django.conf import settings
 from .models import Board, Task
-from project_planner.teams.models import Team
-from project_planner.users.models import User
+from teams.models import Team
 from .serializers import (
     BoardSerializer, 
     BoardCreateSerializer, 

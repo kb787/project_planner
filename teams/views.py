@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 import json
 from .models import Team
-from project_planner.users.models import User
+from users.models import User
 from .serializers import (
     TeamSerializer, 
     TeamCreateSerializer, 
@@ -234,4 +234,5 @@ class TeamUsersView(APIView, TeamBase):
             result = self.list_team_users(json.dumps(request.data))
             return Response(json.loads(result), status=status.HTTP_200_OK)
         except ValueError as e:
+            return Response({"error": str(e)}, status=status.HTTP_404_NOT_FOUND) 
        

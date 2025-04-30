@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Team
-from project_planner.users.models import User
+from users.models import User
 
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:

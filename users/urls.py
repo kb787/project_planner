@@ -1,6 +1,8 @@
 from django.urls import path
-from project_planner.users import views
-
+from . import views
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
 urlpatterns = [
     path('create-user/', views.UserCreateView.as_view(), name='create_user'),
     path('list-user/', views.UserListView.as_view(), name='list_users'),

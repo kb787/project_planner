@@ -13,7 +13,7 @@ from .serializers import (
     UserDescribeSerializer,
     UserTeamSerializer
 )
-from project_planner.teams.models import Team
+from teams.models import Team
 
 class UserBase:
     """Base interface implementation for API's to manage users."""
