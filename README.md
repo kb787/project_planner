@@ -1,3 +1,6 @@
+Submission From Karan Bhanushali, BE Computer Engineering, Atharva College of Engineering
+
+
 Welcome to API Docs of Project Planner Using Django
 
 a. Users API
