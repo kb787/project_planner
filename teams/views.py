@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+import string
 # Create your views here.
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -39,6 +39,7 @@ class TeamBase:
         teams_data = []
         for team in teams:
             teams_data.append({
+                "id":str(team.id),
                 "name": team.name,
                 "description": team.description,
                 "creation_time": team.creation_time.isoformat(),
@@ -77,7 +78,7 @@ class TeamBase:
             data = json.loads(request)
             print(data,'frontend_data')
             team_id = data.get("id")
-            team_data = data.get("team")
+            team_data = data
             print(team_id,'teamId',team_data,'teamData')            
             if not team_id or not team_data:
                 raise ValueError("Team ID and team data are required")
@@ -101,12 +102,15 @@ class TeamBase:
         """Add users to a team."""
         try:
             data = json.loads(request)
-            team_id = data.get("id")
-            user_ids = data.get("users", [])
-            
+            print(data,'frontend_payload_adding_users')
+            team_id = data.get("team_id")
+            user_ids = data.get("user_ids")
+            print(team_id,'teamId Fetched')
+            print(user_ids,'userId Fetched')
             if not team_id:
                 raise ValueError("Team ID is required")
-            
+            elif not user_ids:
+                raise ValueError("User IDs are required")
             try:
                 team = Team.objects.get(id=team_id)
                 print(team,'team_value_for_add_users')
@@ -134,12 +138,15 @@ class TeamBase:
         """Remove users from a team."""
         try:
             data = json.loads(request)
-            team_id = data.get("id")
-            user_ids = data.get("users", [])
-            
+            print(data,'frontend_payload_removing_users')
+            team_id = data.get("team_id")
+            user_ids = data.get("user_ids")
+            print(team_id,'teamId Fetched')
+            print(user_ids,'userId Fetched') 
             if not team_id:
                 raise ValueError("Team ID is required")
-            
+            if not user_ids:
+                raise ValueError("User IDs are required")
             try:
                 team = Team.objects.get(id=team_id)
             except Team.DoesNotExist:

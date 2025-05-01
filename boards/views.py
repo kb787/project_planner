@@ -33,6 +33,8 @@ class ProjectBoardBase:
                 'team_id': data.get('team_id')
             }
             print(formatted_data,'formatted-data')
+            if not formatted_data['team_id'] or not formatted_data['name'] or not formatted_data['description']:
+                raise ValueError("Team ID,Board Name,Board Description is required")
             serializer = BoardCreateSerializer(data=formatted_data)
             if serializer.is_valid():
                 board = serializer.save()
