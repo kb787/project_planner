@@ -80,9 +80,12 @@ class ProjectBoardBase:
             data = json.loads(request)
             print(data,'frontend-payload-add-task')
             board_id = data.get("board_id")
+            title = data.get("title")
+            description = data.get("description")
+            user_id = data.get("user_id")
             print(board_id,'board-id-from-payload')
-            if not board_id:
-                raise ValueError("Board ID is required")
+            if not board_id or not title or not description or not user_id: 
+                raise ValueError("Board ID,task title,description,user_id everything is required")
             
             try:
                 board = Board.objects.get(id=board_id)
@@ -117,6 +120,7 @@ class ProjectBoardBase:
             print(data,'frontend-payload-update-task-status')
             task_id = data.get("id")
             status = data.get("status")
+            user_name = data.get("user_name")
             
             if not task_id or not status:
                 raise ValueError("Task ID and status are required")

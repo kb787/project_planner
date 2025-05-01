@@ -68,23 +68,19 @@ class UserBase:
             print(data,"data")
             user_id = data.get("id")
             user_data = data
-            print(user_id,"user_id")
+            name = user_data.get("name") 
+            display_name  = user_data.get("display_name")
+            print(name,"name value received")
+            print(display_name,"display_name value received")
             print(user_data,"user_data")
-            if not user_id or not user_data:
-                raise ValueError("User ID and user data are required")
-            
+            if not user_id or not name or not display_name:
+                raise ValueError("User ID , name , display_name all are required")
             try:
                 user = User.objects.get(id=user_id)
             except User.DoesNotExist:
                 raise ValueError(f"User with ID {user_id} does not exist")
             
             # User name cannot be updated
-            if "name" in user_data and user_data.get("name") != user.name:
-                raise ValueError("User name cannot be updated")
-            
-            elif "display_name" in user_data and user_data.get("display_name") != user.display_name:
-                raise ValueError("User display name cannot be updated") 
-            
             serializer = UserUpdateSerializer(user, data=user_data, partial=True)
             if serializer.is_valid():
                 serializer.save()

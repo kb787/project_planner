@@ -1,0 +1,19 @@
+=== BOARD: Next_For_Team ===
+Description: Board_Created_for_Team
+Status: OPEN
+Created: 2025-05-01 10:41:47
+Team: Team 3
+
+=== TASKS ===
+
+--- Task: Do running ---
+Status: COMPLETE
+Assigned to: Diana Jones
+Created: 2025-05-01 11:39:41
+Description: Practice Java
+
+--- Task: Do coding ---
+Status: OPEN
+Assigned to: Diana Jones
+Created: 2025-05-01 11:26:15
+Description: Practice Java

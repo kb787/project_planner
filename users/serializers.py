@@ -55,6 +55,7 @@ class UserUpdateSerializer(serializers.ModelSerializer):
          
         elif len(value) == 0:
              raise serializers.ValidationError("New updated name cannot be empty") 
+        return value 
         
     def validate_display_name(self, value):
         if len(value) > 128:  # Update has 128 char limit
